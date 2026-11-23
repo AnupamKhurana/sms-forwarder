@@ -1,0 +1,1076 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/background">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/surface">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="SMS Forwarder"
+            app:titleTextColor="@color/on_surface" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <FrameLayout
+            android:id="@+id/content_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <!-- ==================== HOME SCREEN ==================== -->
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/screen_home"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Status Card -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        app:cardBackgroundColor="@color/surface"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:padding="20dp">
+
+                            <View
+                                android:id="@+id/status_indicator"
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:background="@drawable/dot_red" />
+
+                            <TextView
+                                android:id="@+id/tv_status"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginStart="12dp"
+                                android:text="Inactive"
+                                android:textColor="@color/on_surface"
+                                android:textSize="15sp" />
+
+                            <androidx.appcompat.widget.SwitchCompat
+                                android:id="@+id/switch_enabled"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:thumbTint="@color/primary"
+                                app:trackTint="@color/on_surface_dim" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Setup Guidance Banner (shown when action needed) -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/setup_guidance_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:visibility="gone"
+                        app:cardBackgroundColor="#2D2510"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp"
+                        app:strokeColor="#FFA726"
+                        app:strokeWidth="1dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Setup Required"
+                                android:textColor="#FFA726"
+                                android:textSize="13sp"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="6dp" />
+
+                            <TextView
+                                android:id="@+id/tv_guidance_message"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="#E8E8F0"
+                                android:textSize="13sp"
+                                android:lineSpacingExtra="3dp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Configuration Summary Card -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/surface"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="4dp">
+
+                            <!-- Row: Forwarding Mode -->
+                            <LinearLayout
+                                android:id="@+id/row_forward_mode"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:padding="16dp"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="🎯"
+                                    android:textSize="20sp"
+                                    android:layout_marginEnd="14dp" />
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Forwarding Destination"
+                                        android:textColor="@color/on_surface_dim"
+                                        android:textSize="12sp" />
+
+                                    <TextView
+                                        android:id="@+id/tv_forward_mode"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Telegram Bot"
+                                        android:textColor="@color/on_surface"
+                                        android:textSize="15sp"
+                                        android:layout_marginTop="2dp" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="›"
+                                    android:textColor="@color/on_surface_dim"
+                                    android:textSize="20sp" />
+                            </LinearLayout>
+
+                            <!-- Divider -->
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginEnd="16dp"
+                                android:background="@color/surface_variant" />
+
+                            <!-- Divider: SMS -->
+                            <View
+                                android:id="@+id/div_sms"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginEnd="16dp"
+                                android:background="@color/surface_variant" />
+
+                            <!-- Row: SMS Forwarding (Messaging App / Phone Number) -->
+                            <LinearLayout
+                                android:id="@+id/row_sms"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:padding="16dp"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="💬"
+                                    android:textSize="20sp"
+                                    android:layout_marginEnd="14dp" />
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="SMS (Messaging App) Settings"
+                                        android:textColor="@color/on_surface_dim"
+                                        android:textSize="12sp" />
+
+                                    <TextView
+                                        android:id="@+id/tv_sms_summary"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Not configured — tap to setup"
+                                        android:textColor="@color/on_surface"
+                                        android:textSize="15sp"
+                                        android:layout_marginTop="2dp" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="›"
+                                    android:textColor="@color/on_surface_dim"
+                                    android:textSize="20sp" />
+                            </LinearLayout>
+
+                            <!-- Divider: ntfy -->
+                            <View
+                                android:id="@+id/div_ntfy"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginEnd="16dp"
+                                android:background="@color/surface_variant" />
+
+                            <!-- Row: Instant Push (ntfy) -->
+                            <LinearLayout
+                                android:id="@+id/row_ntfy"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:padding="16dp"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="🔔"
+                                    android:textSize="20sp"
+                                    android:layout_marginEnd="14dp" />
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Instant Push (ntfy) Settings"
+                                        android:textColor="@color/on_surface_dim"
+                                        android:textSize="12sp" />
+
+                                    <TextView
+                                        android:id="@+id/tv_ntfy_summary"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Not configured — tap to setup"
+                                        android:textColor="@color/on_surface"
+                                        android:textSize="15sp"
+                                        android:layout_marginTop="2dp" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="›"
+                                    android:textColor="@color/on_surface_dim"
+                                    android:textSize="20sp" />
+                            </LinearLayout>
+
+                            <View
+                                android:id="@+id/div_telegram"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginEnd="16dp"
+                                android:background="@color/surface_variant" />
+
+                            <!-- Row: Telegram Bot -->
+                            <LinearLayout
+                                android:id="@+id/row_telegram"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:padding="16dp"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="✈️"
+                                    android:textSize="20sp"
+                                    android:layout_marginEnd="14dp" />
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Telegram Bot Settings"
+                                        android:textColor="@color/on_surface_dim"
+                                        android:textSize="12sp" />
+
+                                    <TextView
+                                        android:id="@+id/tv_telegram_summary"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Not configured — tap to setup"
+                                        android:textColor="@color/on_surface"
+                                        android:textSize="15sp"
+                                        android:layout_marginTop="2dp" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="›"
+                                    android:textColor="@color/on_surface_dim"
+                                    android:textSize="20sp" />
+                            </LinearLayout>
+
+                            <!-- Divider -->
+                            <View
+                                android:id="@+id/div_webhook"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginEnd="16dp"
+                                android:background="@color/surface_variant" />
+
+                            <!-- Row: Webhook / Discord -->
+                            <LinearLayout
+                                android:id="@+id/row_webhook"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:padding="16dp"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="🔗"
+                                    android:textSize="20sp"
+                                    android:layout_marginEnd="14dp" />
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Webhook / Discord URL"
+                                        android:textColor="@color/on_surface_dim"
+                                        android:textSize="12sp" />
+
+                                    <TextView
+                                        android:id="@+id/tv_webhook_summary"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Not configured — tap to setup"
+                                        android:textColor="@color/on_surface"
+                                        android:textSize="15sp"
+                                        android:layout_marginTop="2dp" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="›"
+                                    android:textColor="@color/on_surface_dim"
+                                    android:textSize="20sp" />
+                            </LinearLayout>
+
+                            <!-- Divider -->
+                            <View
+                                android:id="@+id/div_email"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginEnd="16dp"
+                                android:background="@color/surface_variant" />
+
+                            <!-- Row: Email (SMTP) -->
+                            <LinearLayout
+                                android:id="@+id/row_email"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:padding="16dp"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="📧"
+                                    android:textSize="20sp"
+                                    android:layout_marginEnd="14dp" />
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Email (SMTP) Settings"
+                                        android:textColor="@color/on_surface_dim"
+                                        android:textSize="12sp" />
+
+                                    <TextView
+                                        android:id="@+id/tv_email_summary"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Not configured — tap to setup"
+                                        android:textColor="@color/on_surface"
+                                        android:textSize="15sp"
+                                        android:layout_marginTop="2dp" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="›"
+                                    android:textColor="@color/on_surface_dim"
+                                    android:textSize="20sp" />
+                            </LinearLayout>
+
+                            <!-- Divider -->
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginEnd="16dp"
+                                android:background="@color/surface_variant" />
+
+                            <!-- Test Forwarding Button -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingHorizontal="16dp"
+                                android:paddingVertical="8dp">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btn_test_forwarding"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="🧪 Test Active Destination"
+                                    android:textColor="@color/primary"
+                                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                    app:strokeColor="@color/primary"
+                                    app:cornerRadius="8dp" />
+                            </LinearLayout>
+
+                            <!-- Divider -->
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginEnd="16dp"
+                                android:background="@color/surface_variant" />
+
+                            <!-- Row: Keywords -->
+                            <LinearLayout
+                                android:id="@+id/row_keywords"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:padding="16dp"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="🔑"
+                                    android:textSize="20sp"
+                                    android:layout_marginEnd="14dp" />
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Forward only if message contains"
+                                        android:textColor="@color/on_surface_dim"
+                                        android:textSize="12sp" />
+
+                                    <TextView
+                                        android:id="@+id/tv_keywords"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="All messages"
+                                        android:textColor="@color/on_surface"
+                                        android:textSize="15sp"
+                                        android:layout_marginTop="2dp" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="›"
+                                    android:textColor="@color/on_surface_dim"
+                                    android:textSize="20sp" />
+                            </LinearLayout>
+
+                            <!-- Divider -->
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginEnd="16dp"
+                                android:background="@color/surface_variant" />
+
+                            <!-- Row: Source filter -->
+                            <LinearLayout
+                                android:id="@+id/row_source_numbers"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:padding="16dp"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="✅"
+                                    android:textSize="20sp"
+                                    android:layout_marginEnd="14dp" />
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Only forward from"
+                                        android:textColor="@color/on_surface_dim"
+                                        android:textSize="12sp" />
+
+                                    <TextView
+                                        android:id="@+id/tv_source_numbers"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Anyone"
+                                        android:textColor="@color/on_surface"
+                                        android:textSize="15sp"
+                                        android:layout_marginTop="2dp" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="›"
+                                    android:textColor="@color/on_surface_dim"
+                                    android:textSize="20sp" />
+                            </LinearLayout>
+
+                            <!-- Divider -->
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginEnd="16dp"
+                                android:background="@color/surface_variant" />
+
+                            <!-- Row: Exclude filter -->
+                            <LinearLayout
+                                android:id="@+id/row_negative_source_numbers"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:padding="16dp"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="🚫"
+                                    android:textSize="20sp"
+                                    android:layout_marginEnd="14dp" />
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Never forward from"
+                                        android:textColor="@color/on_surface_dim"
+                                        android:textSize="12sp" />
+
+                                    <TextView
+                                        android:id="@+id/tv_negative_source_numbers"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="No exclusions"
+                                        android:textColor="@color/on_surface"
+                                        android:textSize="15sp"
+                                        android:layout_marginTop="2dp" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="›"
+                                    android:textColor="@color/on_surface_dim"
+                                    android:textSize="20sp" />
+                            </LinearLayout>
+
+                            <!-- Divider -->
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginEnd="16dp"
+                                android:background="@color/surface_variant" />
+
+                            <!-- Row: Monitored Apps -->
+                            <LinearLayout
+                                android:id="@+id/row_monitored_apps"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:padding="16dp"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="📦"
+                                    android:textSize="20sp"
+                                    android:layout_marginEnd="14dp" />
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Monitored Apps"
+                                        android:textColor="@color/on_surface_dim"
+                                        android:textSize="12sp" />
+
+                                    <TextView
+                                        android:id="@+id/tv_monitored_apps"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Messages &amp; WhatsApp"
+                                        android:textColor="@color/on_surface"
+                                        android:textSize="15sp"
+                                        android:layout_marginTop="2dp" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="›"
+                                    android:textColor="@color/on_surface_dim"
+                                    android:textSize="20sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+            <!-- ==================== LOGS SCREEN ==================== -->
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/screen_logs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp"
+                android:visibility="gone">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/surface"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:strokeWidth="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="12dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Forwarding History"
+                                android:textColor="@color/primary"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:letterSpacing="0.05" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btn_clear_log"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Clear All"
+                                android:textSize="12sp"
+                                style="@style/Widget.MaterialComponents.Button.TextButton"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_empty_log"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="No forwarded messages yet"
+                            android:textColor="@color/on_surface_dim"
+                            android:textSize="14sp"
+                            android:gravity="center"
+                            android:paddingTop="48dp"
+                            android:paddingBottom="48dp" />
+
+                        <LinearLayout
+                            android:id="@+id/log_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </androidx.core.widget.NestedScrollView>
+
+            <!-- ==================== ABOUT SCREEN ==================== -->
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/screen_about"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="40dp">
+
+                    <!-- Intro Section -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        app:cardBackgroundColor="@color/surface"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="About SMS Forwarder"
+                                android:textColor="@color/primary"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="8dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Automatically forward incoming notifications, SMS, RCS, and WhatsApp messages to Instant Push (ntfy.sh), Telegram bot, email inbox, or custom webhook based on your custom rules."
+                                android:textColor="@color/on_surface_dim"
+                                android:textSize="14sp"
+                                android:lineSpacingExtra="4dp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Key Use Cases & Benefits Section -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        app:cardBackgroundColor="@color/surface"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Key Use Cases"
+                                android:textColor="@color/primary"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="8dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="• Multi-Device Sync: Receive OTPs, 2FA codes, and alerts on your computer, tablet, or secondary phone without picking up this device.\n\n• Travel &amp; Dual-SIM: Forward critical SMS and bank alerts to your Telegram or Email while using a travel SIM.\n\n• Team &amp; Family Sharing: Automatically share shared account verifications, utility bills, or delivery notices with your family or team.\n\n• Automation &amp; Webhooks: Route important notifications straight into Discord, Slack, Zapier, or private webhook endpoints.\n\n• 100% Private &amp; On-Device: No cloud servers, no account required, no ads, and no tracking."
+                                android:textColor="@color/on_surface_dim"
+                                android:textSize="14sp"
+                                android:lineSpacingExtra="4dp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- How to Use Section -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        app:cardBackgroundColor="@color/surface"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="How to Use"
+                                android:textColor="@color/primary"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="8dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1. Choose your Forwarding Destination (Instant Push, Telegram Bot, Webhook/Discord, Email, or All).\n2. Configure your destination settings (Instant Push Topic, Bot Token, Webhook URL, or SMTP).\n3. (Optional) Set Keywords (e.g. 'OTP', 'Alert') or Sender Whitelist/Blacklist.\n4. Select Monitored Apps (Messages &amp; WhatsApp, or All Apps).\n5. Grant Notification Access when prompted.\n6. Tap 'Test Active Destination' to verify delivery.\n7. Turn the switch ON at the top of the Home screen.\n8. View forwarded messages in the Logs tab."
+                                android:textColor="@color/on_surface_dim"
+                                android:textSize="14sp"
+                                android:lineSpacingExtra="6dp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Permissions Section -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        app:cardBackgroundColor="@color/surface"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Permissions Needed"
+                                android:textColor="@color/primary"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="8dp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="This app strictly requests only what it needs to function:"
+                                android:textColor="@color/on_surface_dim"
+                                android:textSize="14sp"
+                                android:layout_marginBottom="12dp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="• Notification Access: Intercepts incoming notifications from messaging apps (Google Messages SMS/RCS, WhatsApp) to extract message text and sender info for forwarding. Zero sensitive SMS permissions required.\n\n• Internet: Used exclusively to transmit forwarded messages directly to your configured Instant Push (ntfy.sh) topic, Telegram Bot, custom Webhook, or Email SMTP server.\n\n• Foreground Service &amp; Notifications: Keeps the background listener active and displays a status notification so you always know message monitoring is running."
+                                android:textColor="@color/on_surface_dim"
+                                android:textSize="14sp"
+                                android:lineSpacingExtra="4dp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Privacy Policy Section -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/surface"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Privacy Policy &amp; Data Safety"
+                                android:textColor="@color/primary"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="8dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Your privacy is paramount. SMS Forwarder processes all filtering rules 100% locally on your device.\n\n• No advertising, marketing trackers, or third-party analytics SDKs are embedded.\n• Message data is transmitted solely to the specific endpoints (Instant Push, Telegram, Email, Webhook) you explicitly set up.\n• Forwarding history is saved strictly to your device's private sandbox and can be cleared anytime from the Logs tab."
+                                android:textColor="@color/on_surface_dim"
+                                android:textSize="14sp"
+                                android:lineSpacingExtra="4dp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_marginTop="20dp">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btn_read_privacy_policy"
+                                    style="@style/Widget.MaterialComponents.Button"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Read Full Privacy Policy"
+                                    android:textColor="@color/on_primary"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold"
+                                    android:minHeight="54dp"
+                                    app:backgroundTint="@color/primary"
+                                    app:cornerRadius="12dp"
+                                    app:icon="@drawable/ic_info"
+                                    app:iconGravity="textStart"
+                                    app:iconTint="@color/on_primary"
+                                    android:layout_marginBottom="12dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btn_open_privacy_policy"
+                                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Open Online Privacy Policy (Web)"
+                                    android:textColor="@color/on_surface"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:minHeight="52dp"
+                                    app:strokeColor="@color/on_surface_dim"
+                                    app:strokeWidth="1dp"
+                                    app:cornerRadius="12dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+        </FrameLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/surface"
+            app:itemIconTint="@color/on_surface_dim"
+            app:itemTextColor="@color/on_surface_dim"
+            app:itemRippleColor="@color/primary"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/bottom_nav_menu" />
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

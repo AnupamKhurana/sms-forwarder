@@ -1,0 +1,22 @@
+*.iml
+.gradle
+/local.properties
+/.idea/
+.DS_Store
+/build
+/app/build
+/captures
+.externalNativeBuild
+.cxx
+*.apk
+*.aab
+
+# OS / Editor temporary files
+*.log
+.vscode/
+
+# Local backup directory
+backup/
+
+# Extracted Gradle binary archive
+gradle-8.11.1/

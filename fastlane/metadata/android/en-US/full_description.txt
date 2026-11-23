@@ -1,0 +1,15 @@
+SMS & Message Forwarder is a lightweight, privacy-focused automation tool that intercepts incoming text notifications (such as 2FA OTP verification codes, banking transaction updates, and server alerts) and forwards them to your configured destination based on your custom rules.
+
+Supported destinations include:
+• SMS (Forward to another phone number via cellular SMS or your default messaging app)
+• Instant Push via ntfy.sh (Zero accounts, zero passwords, instant web and phone push)
+• Telegram Bot API
+• Email (SMTP with direct SSL/TLS or STARTTLS)
+• Custom Webhook (Discord, Slack, Zapier, n8n, self-hosted endpoints)
+
+Key Features:
+• 100% On-Device Rule Processing: Whitelist and blacklist rules are evaluated locally.
+• Smart Keyword Filters: Forward only messages containing specific words (e.g. OTP, verification, bank).
+• Sender Filtering: Restrict to known contacts or block promotional spam senders.
+• In-App Delivery Logs: View forwarded alerts with timestamps and status indicators.
+• Zero Cloud Trackers: No analytics, telemetry, or third-party ads.

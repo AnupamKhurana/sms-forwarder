@@ -1,0 +1,21 @@
+Categories:
+  - Connectivity
+  - System
+License: GPL-3.0-or-later
+AuthorName: SMS Forwarder Contributors
+SourceCode: https://github.com/anupamkhurana/sms-forwarder
+IssueTracker: https://github.com/anupamkhurana/sms-forwarder/issues
+
+AutoUpdateMode: Version
+UpdateCheckMode: Tags
+
+CurrentVersion: '1.0'
+CurrentVersionCode: 1
+
+Builds:
+  - versionName: '1.0'
+    versionCode: 1
+    commit: v1.0
+    subdir: app
+    gradle:
+      - yes
