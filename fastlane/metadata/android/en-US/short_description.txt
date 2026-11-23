@@ -1,1 +1,1 @@
-Privacy-first automation to forward SMS, RCS, and message alerts.
+Forward incoming SMS, RCS, and alerts to SMS, Push, Telegram, or Email.

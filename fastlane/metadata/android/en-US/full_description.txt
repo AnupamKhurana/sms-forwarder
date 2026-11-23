@@ -1,15 +1,27 @@
-SMS & Message Forwarder is a lightweight, privacy-focused automation tool that intercepts incoming text notifications (such as 2FA OTP verification codes, banking transaction updates, and server alerts) and forwards them to your configured destination based on your custom rules.
+Never miss critical verification codes, bank updates, or emergency server alerts again. SMS & Message Forwarder is a lightweight, privacy-focused automation tool that monitors incoming notifications and seamlessly dispatches matching alerts to your chosen destination.
 
-Supported destinations include:
-• SMS (Forward to another phone number via cellular SMS or your default messaging app)
-• Instant Push via ntfy.sh (Zero accounts, zero passwords, instant web and phone push)
-• Telegram Bot API
-• Email (SMTP with direct SSL/TLS or STARTTLS)
-• Custom Webhook (Discord, Slack, Zapier, n8n, self-hosted endpoints)
+🚀 Supported Forwarding Channels:
+• SMS & Messaging App: Forward directly to another mobile number via cellular SMS (using SmsManager) or prepare drafts in your default messaging app (Google Messages, Samsung Messages).
+• Instant Push (ntfy.sh): Zero-setup, password-free push alerts delivered in real-time to your computer browser or mobile device.
+• Telegram Bot: Instant forwarding directly into your personal chat or group.
+• Email (SMTP): Direct email dispatch supporting SSL/TLS (port 465) and STARTTLS (port 587) with Gmail App Passwords, Outlook, or custom mail servers.
+• Webhooks: Dispatches structured JSON payloads to Discord, Slack, Zapier, n8n, or self-hosted API endpoints.
+• Multi-Channel Mode: Forward to all configured destinations simultaneously.
 
-Key Features:
-• 100% On-Device Rule Processing: Whitelist and blacklist rules are evaluated locally.
-• Smart Keyword Filters: Forward only messages containing specific words (e.g. OTP, verification, bank).
-• Sender Filtering: Restrict to known contacts or block promotional spam senders.
-• In-App Delivery Logs: View forwarded alerts with timestamps and status indicators.
-• Zero Cloud Trackers: No analytics, telemetry, or third-party ads.
+🎯 Popular Use Cases:
+• Multi-Device Convenience: Receive 2FA login OTPs on your PC, laptop, or tablet while your phone is charging in another room.
+• Travel & Dual-SIM: Leave your secondary phone or local SIM connected to WiFi at home and receive banking alerts abroad via Telegram, Email, or SMS.
+• DevOps & Server Alerts: Route incoming SMS downtime alerts directly to a team Discord channel or Slack webhook.
+• Family Sharing: Automatically forward shared utility bills or streaming verification codes to a household chat.
+
+⚡ Smart Filtering & Control:
+• Keyword Matching: Forward only messages containing specific phrases (e.g. "otp", "alert", "code", "balance").
+• Sender Whitelist & Blacklist: Restrict forwarding to trusted contacts or filter out spam and marketing broadcasts.
+• Deduplication Cache: Built-in 15-second window prevents duplicate dispatches from updating notifications.
+• Local History Logs: Review forwarded alerts and delivery statuses stored securely on your device.
+
+🔒 Privacy & Security Guarantee:
+• 100% On-Device Processing: Filter rules and message evaluations run entirely locally.
+• Direct Encrypted Dispatch: Matching messages are sent straight to your configured destinations over TLS/SSL.
+• Zero Cloud Intermediaries: No analytics, tracking SDKs, or developer servers.
+• Open Source: Fully free and open-source software under the GNU General Public License v3.0 (GPLv3).
